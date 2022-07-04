@@ -1,0 +1,8 @@
+-f https://download.pytorch.org/whl/torch_stable.html
+
+librosa
+numpy
+torch
+scipy
+einops
+tqdm
