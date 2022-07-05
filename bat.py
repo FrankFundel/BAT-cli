@@ -2,15 +2,12 @@
 
 import argparse
 import os
-from cv2 import threshold
 from tqdm import tqdm
 import functools
 
 from datasets.prepare_data import prepareData
 from datasets.prepare_sequences import getSequences, germanBats
 from models.bat_2 import BAT
-
-import matplotlib.pyplot as plt # remove later !!!
 
 import torch
 import librosa
@@ -30,7 +27,6 @@ args = parser.parse_args()
 
 classes = germanBats
 sample_rate = 22050          # recordings are in 96 kHz, 24 bit depth, 1:10 TE (mic sr 960 kHz), 22050 Hz = 44100 Hz TE
-threshold = args.threshold
 
 model = BAT(
     max_len=60,
@@ -67,6 +63,8 @@ def predict(filename):
     
     if args.threshold == -1:
       threshold = prediction.mean(axis=0)
+    else:
+      threshold = args.threshold
 
     labels = torch.nonzero(prediction > threshold)[:, 0].tolist()
     labels.sort(key=functools.cmp_to_key(compare))
