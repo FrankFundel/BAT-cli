@@ -4,15 +4,14 @@ import argparse
 import os
 from tqdm import tqdm
 import functools
-
-from datasets.prepare_data import prepareData
-from datasets.prepare_sequences import getSequences, germanBats
-from models.bat_2 import BAT
-
 import torch
 import librosa
 import numpy as np
 import csv
+
+from datasets.prepare_data import prepareData
+from datasets.prepare_sequences import getSequences, germanBats
+from models.bat_2 import BAT
 
 def dir_path(string):
     if os.path.isdir(string):
